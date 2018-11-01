@@ -12,9 +12,16 @@ export function receiveCharacters(result){
   };
 };
 
-export function fetchCharacters(searchString){
+export function setCategory(category){
+  return {
+    type: 'SET_CATEGORY',
+    category
+  };
+};
+
+export function fetchCharacters(searchString, category){
   return function(dispatch, getState){
-    fetch(`https://swapi.co/api/people/?search=${searchString}`)
+    fetch(`https://swapi.co/api/${category}/?search=${searchString}`)
     .then(response => response.json())
     .then(result => {
       dispatch(receiveCharacters(result.results))
